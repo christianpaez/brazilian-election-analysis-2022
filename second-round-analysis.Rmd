@@ -1,0 +1,38 @@
+---
+author: "By: Christian Páez"
+date: "Last updated: `r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+source("model.R", local = knitr::knit_global())
+```
+---
+title: "Luiz Inácio Lula da Silva has a `r round(d_hat * 100)`% chance of winning the 2022 presidential election(Second Round)"
+---
+
+This statistical model attempts to make a probabilistic statement about Luiz Inácio Lula da Silva's chances of winning the 2022 Brazilian Presidential Election(Second round), this was accomplished using public polling data, statistical inference, the Bayes theorem and some analysis of previous elections.
+
+##
+
+```{r, include=TRUE, echo=FALSE, fig.width=7}
+  winner_plot
+```
+
+## Notes
+
+- Polling data was extracted from Wikipedia.    
+- A historical spread was measured using past election results(1989-2018).
+- This model predicts a winner if the election was done today(due to the time effect in opinion polls).
+- A general bias term of 2.5% was added(as seen on USA poll data) but a proper estimate with Brazilian data may be added later.
+
+## References
+- https://en.wikipedia.org/wiki/Opinion_polling_for_the_2022_Brazilian_presidential_election
