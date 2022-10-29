@@ -23,6 +23,15 @@ clean_second_round_dataframe = function(dataframe) {
     return(dataframe %>% mutate(period = 
                            str_replace_all(period, "[0-9]+–", "")))
   }
+  format_pollster_name = function() {
+    return(dataframe %>% mutate(pollster = remove_number_from_pollster_name(pollster)))
+  }
+  one_poll_per_pollster = function() {
+    return(dataframe %>% 
+             group_by(pollster) %>% 
+             filter(period == max(period)) %>%
+             ungroup())
+  }
   dataframe_headers = c("pollster", 
                         "period", 
                         "samplesize", 
@@ -36,10 +45,11 @@ clean_second_round_dataframe = function(dataframe) {
   dataframe = remove_header_row()
   dataframe = remove_empty_rows()
   dataframe = format_period_column()
-  dataframe = dataframe %>% mutate(pollster = remove_number_from_pollster_name(pollster))
+  dataframe = format_pollster_name()
   for (column in numeric_columns) {
     dataframe[column] = sapply(dataframe[column], percentage_value_to_decimal)
   }
+  #dataframe = one_poll_per_pollster()
   return(dataframe)
 }
 
