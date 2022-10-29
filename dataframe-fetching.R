@@ -49,7 +49,7 @@ clean_second_round_dataframe = function(dataframe) {
   for (column in numeric_columns) {
     dataframe[column] = sapply(dataframe[column], percentage_value_to_decimal)
   }
-  #dataframe = one_poll_per_pollster()
+  dataframe = one_poll_per_pollster()
   return(dataframe)
 }
 
